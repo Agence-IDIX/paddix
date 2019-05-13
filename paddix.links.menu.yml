@@ -1,0 +1,6 @@
+paddix.admin_settings:
+  title: 'Paddix'
+  description: 'Configure Paddix connection.'
+  route_name: paddix.settings
+  parent: system.admin_config_services
+  weight: 20

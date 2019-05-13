@@ -1,0 +1,31 @@
+# French translation of Paddix
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"POT-Creation-Date: 2018-06-13 17:00+0200\n"
+"PO-Revision-Date: 2018-06-13 17:00+0200\n"
+"Last-Translator: Gothon gauthier.cosson@idix.fr\n"
+"Language-Team: FR gauthier.cosson@idix.fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Paddix"
+msgstr "Paddix"
+
+msgid "Manage interactions with Paddix."
+msgstr "Gère les interactions avec Paddix"
+
+msgid "Invalid Paddix fields mapping"
+msgstr "Correspondance des champs Paddix non conforme"
+
+msgid "Invalid Paddix credentials"
+msgstr "Paramètres d'authenfication Paddix erronés"
+
+msgid "Internal Paddix error"
+msgstr "Erreur Paddix interne"
+
+msgid "Error on Paddix request"
+msgstr "Une erreur s'est produite lors de la communication avec Paddix"

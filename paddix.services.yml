@@ -1,0 +1,21 @@
+services:
+  paddix.api_client:
+    class: Drupal\paddix\Client\ApiClient
+    arguments: ['@user.private_tempstore']
+
+  paddix.entity_formatter:
+    class: Drupal\paddix\Formatter\EntityFormatter
+    arguments: ['@paddix.attachment_adapter']
+
+  paddix.attachment_adapter:
+    class: Drupal\paddix\Adapter\AttachmentAdapter
+    arguments: ['@paddix.api_client']
+  paddix.edition_adapter:
+    class: Drupal\paddix\Adapter\EditionAdapter
+    arguments: ['@paddix.api_client', '@paddix.entity_formatter']
+  paddix.flatplan_adapter:
+    class: Drupal\paddix\Adapter\FlatplanAdapter
+    arguments: ['@paddix.api_client', '@paddix.entity_formatter']
+
+  paddix.entity_dispatcher:
+    class: Drupal\paddix\Dispatcher\EntityDispatcher

@@ -1,0 +1,7 @@
+paddix.settings:
+  path: '/admin/config/services/paddix'
+  defaults:
+    _form: '\Drupal\paddix\Form\SettingsForm'
+    _title: 'Paddix'
+  requirements:
+    _permission: 'administer site configuration'

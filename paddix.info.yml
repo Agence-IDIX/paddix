@@ -1,0 +1,9 @@
+name: Paddix
+type: module
+description: 'Manage interactions with Paddix.'
+version: '8.x-1.0'
+core: '8.x'
+package: Paddix
+#
+interface translation project: paddix
+interface translation server pattern: modules/custom/paddix/translations/%project.%language.po

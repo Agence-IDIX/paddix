@@ -1,0 +1,25 @@
+<?php
+
+function paddix_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  if (!$entity instanceof \Drupal\Core\Entity\ContentEntityBase) {
+    return;
+  }
+
+  \Drupal::service('paddix.entity_dispatcher')->synchronize($entity);
+}
+
+function paddix_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
+  if (!$entity instanceof \Drupal\Core\Entity\ContentEntityBase) {
+    return;
+  }
+
+  \Drupal::service('paddix.entity_dispatcher')->synchronize($entity);
+}
+
+function paddix_entity_delete(Drupal\Core\Entity\EntityInterface $entity) {
+  if (!$entity instanceof \Drupal\Core\Entity\ContentEntityBase) {
+    return;
+  }
+
+  \Drupal::service('paddix.entity_dispatcher')->deleteSynchronized($entity);
+}
