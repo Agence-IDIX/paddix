@@ -1,0 +1,10 @@
+{
+    "name": "idix/paddix",
+    "type": "drupal-custom-module",
+    "description": "Manage interactions with Paddix.",
+    "keywords": ["Drupal"],
+    "authors": [],
+    "require": {
+      "drupal/core": "8.*"
+    }
+  }
