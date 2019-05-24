@@ -66,7 +66,9 @@ class ApiClient {
 
     switch ($exception->getCode()) {
       case 400:
-        throw new PaddixRequestException(t('Invalid Paddix fields mapping'), $exception->getCode());
+        $paddixException = new PaddixRequestException(t('Invalid Paddix fields mapping'), $exception->getCode());
+        $this->insertExceptionDetails($paddixException, $exception->getResponse());
+        throw $paddixException;
       case 401:
         throw new PaddixRequestException(t('Invalid Paddix credentials'), $exception->getCode());
       case 404:
@@ -76,6 +78,21 @@ class ApiClient {
       default:
         throw new PaddixRequestException(t('Error on Paddix request (code:' . $exception->getCode() . ')'), $exception->getCode());
     }
+  }
+
+  private function insertExceptionDetails(PaddixRequestException $exception, ResponseInterface $response)
+  {
+    $contents = $response->getBody()->getContents();
+    if (empty($contents)) {
+      return;
+    }
+
+    $message = json_decode($contents, TRUE);
+    if (!isset($message['errors'])) {
+      return;
+    }
+
+    $exception->setErrors($message['errors']);
   }
 
   private function generateToken() {

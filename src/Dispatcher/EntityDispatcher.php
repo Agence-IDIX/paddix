@@ -4,6 +4,7 @@ namespace Drupal\paddix\Dispatcher;
 
 use Drupal\commerce_product\Entity\Product;
 use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Link;
 use Drupal\node\Entity\Node;
 use Drupal\paddix\Adapter\AbstractMappedAdapter;
 use Drupal\paddix\Exception\PaddixRequestException;
@@ -20,7 +21,7 @@ class EntityDispatcher {
       try {
         $this->insertUpdateEntity($entity, $adapter);
       } catch (PaddixRequestException $exception) {
-        drupal_set_message(t($exception->getMessage()) . ' (code: ' . $exception->getCode() . ')', 'error', true);
+        $this->manageRequestException($exception, $entity, $adapter);
         return;
       }
     }
@@ -38,10 +39,33 @@ class EntityDispatcher {
       try {
         $this->deleteEntity($entity, $adapter);
       } catch (PaddixRequestException $exception) {
-        drupal_set_message(t($exception->getMessage()) . ' (code: ' . $exception->getCode() . ')', 'error', true);
+        $this->manageRequestException($exception, $entity, $adapter);
         return;
       }
     }
+  }
+
+  private function manageRequestException(PaddixRequestException $exception, ContentEntityBase $entity, array $adapter) {
+    drupal_set_message(t($exception->getMessage()) . ' (code: ' . $exception->getCode() . ')', 'error', TRUE);
+
+    $errors = $exception->getErrors();
+    if (empty($errors)) {
+      return;
+    }
+
+    foreach ($errors as $field => $message) {
+      $this->addExceptionErrorMessage($field, $message, $entity, $adapter);
+    }
+  }
+
+  private function addExceptionErrorMessage($field, $message, ContentEntityBase $entity, $adapter) {
+    if (!isset($adapter['fields']['data'][$field])) {
+      return;
+    }
+
+    $fieldLabel = $entity->getFieldDefinition($adapter['fields']['data'][$field])->getLabel();
+
+    drupal_set_message($fieldLabel . ' : ' . t($message), 'error', TRUE);
   }
 
   public function getMapping(ContentEntityBase $entity) {
