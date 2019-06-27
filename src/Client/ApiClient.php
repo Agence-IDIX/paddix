@@ -140,7 +140,8 @@ class ApiClient {
   public function post($route, array $body, array $options = []) {
     $options = array_merge([
       'headers' => $this->makeLoginHeaders(),
-      'json' => $body
+      'json' => $body,
+      'timeout' => 60
     ], $options);
 
     return $this->call('POST', $route, $options);
