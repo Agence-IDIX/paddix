@@ -13,7 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiClient {
   const MODULE_KEY = 'paddix',
-    TOKEN_KEY = 'paddix_token';
+    TOKEN_KEY = 'paddix_token',
+    POST_REQUEST_TIMEOUT = 180;
 
   private $tempStore;
 
@@ -141,7 +142,7 @@ class ApiClient {
     $options = array_merge([
       'headers' => $this->makeLoginHeaders(),
       'json' => $body,
-      'timeout' => 60
+      'timeout' => self::POST_REQUEST_TIMEOUT
     ], $options);
 
     return $this->call('POST', $route, $options);
